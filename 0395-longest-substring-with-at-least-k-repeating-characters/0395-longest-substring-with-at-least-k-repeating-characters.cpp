@@ -10,7 +10,7 @@ public:
 			nums[s[right] - 'a']++;
 			bool valid = true;
 			for (char c = 'a'; c <= 'z'; c++) {
-				if (nums[c - 'a'] > 0 && nums[c - 'a'] < k) {
+				if (nums[c-'a']>0 && nums[c-'a']<k) {
 					valid = false;
 					break;
 				}
