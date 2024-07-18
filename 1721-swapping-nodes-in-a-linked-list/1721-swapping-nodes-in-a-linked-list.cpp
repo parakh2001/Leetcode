@@ -11,30 +11,31 @@
 class Solution {
 public:
     ListNode* swapNodes(ListNode* head, int k) {
-        // Find the length of the linked list
-        int length = 0;
-        ListNode* temp = head;
-        while (temp) {
-            length++;
-            temp = temp->next;
+        ListNode* first = head;
+        ListNode* second = head;
+        ListNode* current = head;
+
+        // Move the `first` pointer to the k-th node
+        for (int i = 1; i < k; ++i) {
+            first = first->next;
         }
-        // Identify the positions from start and end
-        int nodeFromStartIndex = k - 1;
-        int nodeFromEndIndex = length - k;
-        // Find the k-th node from the start
-        ListNode* firstNode = head;
-        for (int i = 0; i < nodeFromStartIndex; ++i) {
-            firstNode = firstNode->next;
+
+        // Keep a reference to the k-th node
+        ListNode* kthNodeFromStart = first;
+
+        // Move the `current` pointer to the end while moving the `second` pointer to the k-th node from the end
+        while (current->next != nullptr) {
+            current = current->next;
+            if (--k <= 0) {
+                second = second->next;
+            }
         }
-        // Find the k-th node from the end
-        ListNode* secondNode = head;
-        for (int i = 0; i < nodeFromEndIndex; ++i) {
-            secondNode = secondNode->next;
-        }
-        // Swap the values of the two nodes
-        int tempVal = firstNode->val;
-        firstNode->val = secondNode->val;
-        secondNode->val = tempVal;
+
+        // Swap the values of the k-th node from the start and the k-th node from the end
+        int tempVal = kthNodeFromStart->val;
+        kthNodeFromStart->val = second->val;
+        second->val = tempVal;
+
         return head;
     }
 };
